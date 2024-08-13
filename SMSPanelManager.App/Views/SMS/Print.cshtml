@@ -1,0 +1,92 @@
+﻿@model Tuple<List<SMSPanelManager.Data.Entities.OrderedProducts>,List<SMSPanelManager.Data.Entities.PrinteableSMS>>
+@using SMSPanelManager.Core.Convertors;
+@using SMSPanelManager.Data.Entities;
+@{
+    List<OrderedProducts> orderedProducts = Model.Item1;
+
+
+}
+<div class="row">
+</div>
+<div class="row justify-content-center">
+    @{
+        int count = 1;
+    }
+    @foreach (var item in Model.Item2)
+    {
+
+        <div class="col-7">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h6 class="text-center">
+                        @count
+                    </h6>
+                </div>
+                <div class="col-6">
+                    <h4 class="d-flex d-inline">تاریخ:</h4>
+                </div>
+                <div class="col-6">
+                    <h5 class="text-start">@item.CreatedTime.ToShamsi()</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="d-flex d-inline">شماره تلفن</h4>
+                </div>
+                <div class="col-6">
+                    <h5 class="text-start">@item.PhoneNumber</h5>
+                </div>
+            </div>
+        </div>
+        @if (item.Contact != null)
+        {
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="d-flex d-inline">نام</h4>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="text-start">@item.Contact.Name</h5>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-7">
+            <table class="table text-center table-dark table-bordered col-12 mb-0">
+                <tr>
+                    <th>تام کالا</th>
+                    <th>مقدار</th>
+                </tr>
+                @foreach (var item2 in orderedProducts.Where(c => c.PrintableSMSId == item.Id))
+                {
+                    <tr>
+                        <td><h4>@item2.OrderedProduct</h4></td>
+                        <td><h4>@item2.Count</h4></td>
+                    </tr>
+                }
+            </table>
+            <div class="mt-0 mb-4">
+                <a href="/SMS/SinglePrint?Id=@item.Id" class="btn @((item.IsPrinted)?"btn-danger":"btn-warning") btn-sm rounded-2 mt-0">PRINT</a>
+            </div>
+        </div>
+
+        count++;
+    }
+   
+</div>
+
+
+
+@*@section CustomScripts{
+    <script>
+        const Count = document.getElementsByTagName("a");
+        for (let i = 0; i < Count.length; i++) {
+            Count[i].addEventListener('click',()=>{
+                location.reload()
+            });
+        }
+    </script>
+}*@

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SMSPanelManager.Data.Entities.PrinteableSMS>
+@using SMSPanelManager.Core.Convertors;
+@{
+    int i = 1;
+}
+<div dir="rtl" class="row mt-4">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/EditProfile" class="btn btn-outline-info">ویرایش رمز عبور و نام کاربری</a>
+        @*<a class="btn btn-outline-danger" href="/SMS/DeleteSMSs?Type=All">حذف تمامی دریافتی ها</a>*@
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            حذف تمامی دریافتی ها
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">آیا میخواهید حذف کنید ؟</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-outline-danger" href="/SMS/DeleteSMSs?Type=All">حذف تمامی دریافتی ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-outline-info" href="/Product/Index">مدیریت کالاها</a>
+        <a href="/sms/Print" class="btn btn-outline-warning">چاپ و فاکتور کردن پیام های دریافتی امروز</a>
+        <a href="/Contact/Index" class="btn btn-outline-warning">مدیریت مخاطبین</a>
+        <a href="/Logout" class="btn btn-success">خروج از حساب کاربری</a>
+    </div>
+</div>
+<div dir="rtl" class="row mt-2 text-center justify-content-center">
+    <div class="col-6">
+      <h3><b>تعداد پیام های دریافتی از آخرین حذف</b>: @Model.Count()</h3>
+        <table class="table table-dark table-bordered bg-dark">
+            <tr>
+                <th>ID</th>
+                <th>فرستنده</th>
+                <th>زمان دریافت پیام از سرویس</th>
+            </tr>
+      
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    @if (item.Contact != null)
+                    {
+                        <td>@item.Contact.Name</td>
+                    }
+                    else
+                    {
+                        <td>@item.PhoneNumber</td>
+                    }
+                    <td>@item.CreatedTime.ToShamsi()</td>
+                </tr>
+             
+                i++;
+            }
+        </table>
+    </div>
+  
+</div>

@@ -1,0 +1,19 @@
+﻿@model SMSPanelManager.Data.Entities.Contact;
+@{
+    ViewData["Title"] = "مدیریت مخاطبین";
+}
+
+<div class="row justify-content-center" style="height:100vh">
+    <div class="p-2 row align-self-center justify-content-center w-50 h-25" style="border:solid 2px rgb(95 227 12 / 55%);border-radius:15px">
+        <center>
+            <h1>صفحه ساخت مخاطب جدید</h1>
+            <div class="col-6 align-self-center mt-5">
+                <form method="post">
+                    <input asp-for="Name" class="form-control" placeholder="نام مخاطب" />
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="شماره تلفن" />
+                    <button class="btn btn-success" type="submit">ثبت</button>
+                </form>
+            </div>
+        </center>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+﻿@model Tuple<List<SMSPanelManager.Data.Entities.OrderedProducts>,SMSPanelManager.Data.Entities.PrinteableSMS>
+@using SMSPanelManager.Core.Convertors;
+@using SMSPanelManager.Data.Entities;
+@{
+    List<OrderedProducts> orderedProducts = Model.Item1;
+    int i = 1;
+
+}
+@section CustomStyles{
+    <style type="text/css">
+        @@media print {
+            #btn {
+                display: none;
+            }
+        }
+    </style>
+ }
+<div class="row">
+</div>
+<div class="row">
+    <button class="btn btn-warning" id="print">Print</button>
+    <div class="col-12 p-0 m-0">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="d-flex d-inline">تاریخ:</h4>
+            </div>
+            <div class="col-6">
+                <h5 class="text-start">@Model.Item2.CreatedTime.ToShamsi()</h5>
+            </div>
+        </div>
+    </div>
+    @if (Model.Item2.Contact != null)
+    {
+        <div class="col-12 p-0 m-0">
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="d-flex d-inline">نام</h4>
+                </div>
+                <div class="col-6">
+                    <h5 class="text-start">@Model.Item2.Contact.Name</h5>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="col-12 p-0 m-0">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="d-flex d-inline">شماره تلفن</h4>
+            </div>
+            <div class="col-6">
+                <h5 class="text-start">@Model.Item2.PhoneNumber</h5>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="col-12">
+        <table class="table text-center table-dark table-bordered col-12"style="border:4px black">
+            <tr>
+                <th>ID</th>
+                <th>تام کالا</th>
+                <th>مقدار</th>
+            </tr>
+            @foreach (var item2 in orderedProducts.Where(c => c.PrintableSMSId == Model.Item2.Id))
+            {
+                <tr>
+                    <td>@i</td>
+                    <td class="p-0 m-0">@item2.OrderedProduct</td>
+                    <td class="p-0 m-0">@item2.Count</td>
+                </tr>
+                i++;
+            }
+        </table>
+    </div>
+</div>
+@section CustomScripts{
+    <script>
+        let PrintBtn = document.getElementById("print");
+         PrintBtn.addEventListener("click",()=>{
+             print();
+         });
+         window.addEventListener("beforeprint",()=>{
+             PrintBtn.style.display = "none";
+         });
+        window.addEventListener("afterprint", () => {
+            setTimeout(function () {
+                window.history.back();
+            }, 3000);
+        
+        });
+        document.addEventListener('DOMContentLoaded',()=>{
+            print();
+           
+        })
+
+    </script>
+}

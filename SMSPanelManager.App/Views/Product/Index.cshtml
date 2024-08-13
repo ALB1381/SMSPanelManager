@@ -1,0 +1,37 @@
+﻿@model List<SMSPanelManager.Data.Entities.Products>
+
+@{
+    ViewData["Title"] = "مدیریت کالا ها";
+    int i = 1;
+}
+
+<div class="row">
+
+    <center>
+        <div class="col-5">
+
+            <a class="btn btn-success mt-4" href="/Product/CreateProduct">افزودن کالا</a>
+            <hr />
+            <table class="table table-bordered bg-dark table-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">نام کالا</th>
+                    <th class="text-center">اکشن</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">@i</td>
+                        <td class="text-center">@item.ProductName</td>
+                        <td>
+                            <center>
+                                <a class="btn btn-danger" href="/Product/DeleteProduct?ProductId=@item.ProductId">حذف</a>
+                            </center>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </table>
+        </div>
+    </center>
+</div>

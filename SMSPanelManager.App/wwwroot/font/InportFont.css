@@ -1,0 +1,25 @@
+﻿@font-face {
+    font-family: 'Yekan';
+    src: url('Yekan.ttf');
+}
+p{
+    font-family:Yekan;
+}
+h1{font-family:Yekan;}
+h2{font-family:Yekan;}
+h3{font-family:Yekan;}
+h4{font-family:Yekan;}
+h5{font-family:Yekan;}
+h6{font-family:Yekan;}
+td{
+    font-family:Yekan;
+}
+th{
+    font-family:Yekan;
+}
+button {
+    font-family: Yekan;
+}
+a {
+    font-family: Yekan;
+}

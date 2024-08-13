@@ -1,0 +1,25 @@
+﻿@model SMSPanelManager.Core.DTO.LoginDTOs
+@{
+    ViewData["Title"] = "صفحه ورود به پنل مدیریت";
+}
+
+@section CustomStyles{
+}
+
+<div class="row justify-content-center" style="height:100vh">
+    <div class="p-2 row align-self-center justify-content-center w-50 h-25" style="border:solid 2px rgb(95 227 12 / 55%);border-radius:15px">
+        <center>
+            <h1>صفحه ورود به پنل مدیریت</h1>
+
+            <div class="col-6 align-self-center mt-5">
+                <form method="post">
+                    <input type="text" asp-for=UserName class="form-control text-center mb-2 bg-dark" style="color:rgb(95 227 12 / 55%);border:0px" placeholder="نام کاربری">
+                    <input dir="ltr" asp-for=Password type="password" class="form-control text-center bg-dark" style="color:rgb(95 227 12 / 55%);border:0px" placeholder="رمز عبور" />
+                    <button class="btn btn-success  mt-2">
+                        ورود
+                    </button>
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
